@@ -13,7 +13,7 @@ projects:
   dir: core/network
   execution_order_group: 0
   name: core_network
-  workflow: terrarunt
+  workflow: terragrunt
 - autoplan:
     enabled: true
     when_modified:
@@ -25,7 +25,7 @@ projects:
   dir: core/security
   execution_order_group: 0
   name: core_security
-  workflow: terrarunt
+  workflow: terragrunt
 - autoplan:
     enabled: true
     when_modified:
@@ -44,7 +44,7 @@ projects:
   dir: layer1/compute
   execution_order_group: 1
   name: layer1_compute
-  workflow: terrarunt
+  workflow: terragrunt
 - autoplan:
     enabled: true
     when_modified:
@@ -63,7 +63,7 @@ projects:
   dir: layer1/monitoring
   execution_order_group: 1
   name: layer1_monitoring
-  workflow: terrarunt
+  workflow: terragrunt
 - autoplan:
     enabled: true
     when_modified:
@@ -82,7 +82,7 @@ projects:
   dir: layer1/storage
   execution_order_group: 1
   name: layer1_storage
-  workflow: terrarunt
+  workflow: terragrunt
 - autoplan:
     enabled: true
     when_modified:
@@ -110,7 +110,7 @@ projects:
   dir: layer2/analytics
   execution_order_group: 2
   name: layer2_analytics
-  workflow: terrarunt
+  workflow: terragrunt
 - autoplan:
     enabled: true
     when_modified:
@@ -135,7 +135,7 @@ projects:
   dir: layer2/api
   execution_order_group: 2
   name: layer2_api
-  workflow: terrarunt
+  workflow: terragrunt
 - autoplan:
     enabled: true
     when_modified:
@@ -160,5 +160,5 @@ projects:
   dir: layer2/frontend
   execution_order_group: 2
   name: layer2_frontend
-  workflow: terrarunt
+  workflow: terragrunt
 version: 3
