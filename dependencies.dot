@@ -1,0 +1,23 @@
+digraph {
+	"core/network" ;
+	"core/security" ;
+	"layer1/compute" ;
+	"layer1/compute" -> "core/network";
+	"layer1/compute" -> "core/security";
+	"layer1/monitoring" ;
+	"layer1/monitoring" -> "core/network";
+	"layer1/monitoring" -> "core/security";
+	"layer1/storage" ;
+	"layer1/storage" -> "core/network";
+	"layer1/storage" -> "core/security";
+	"layer2/analytics" ;
+	"layer2/analytics" -> "layer1/compute";
+	"layer2/analytics" -> "layer1/storage";
+	"layer2/analytics" -> "layer1/monitoring";
+	"layer2/api" ;
+	"layer2/api" -> "layer1/compute";
+	"layer2/api" -> "layer1/storage";
+	"layer2/frontend" ;
+	"layer2/frontend" -> "layer1/storage";
+	"layer2/frontend" -> "layer1/monitoring";
+}

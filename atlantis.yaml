@@ -1,0 +1,164 @@
+automerge: false
+parallel_apply: true
+parallel_plan: true
+projects:
+- autoplan:
+    enabled: true
+    when_modified:
+    - '*.hcl'
+    - '*.tf*'
+    - ../../terragrunt.hcl
+    - ../../modules/core-network/*.tf*
+    - ../../common.tfvars
+  dir: core/network
+  execution_order_group: 0
+  name: core_network
+  workflow: terragrunt
+- autoplan:
+    enabled: true
+    when_modified:
+    - '*.hcl'
+    - '*.tf*'
+    - ../../terragrunt.hcl
+    - ../../modules/core-security/*.tf*
+    - ../../common.tfvars
+  dir: core/security
+  execution_order_group: 0
+  name: core_security
+  workflow: terragrunt
+- autoplan:
+    enabled: true
+    when_modified:
+    - '*.hcl'
+    - '*.tf*'
+    - ../../terragrunt.hcl
+    - ../../core/network/terragrunt.hcl
+    - ../../modules/core-network/*.tf*
+    - ../../common.tfvars
+    - ../../core/security/terragrunt.hcl
+    - ../../modules/core-security/*.tf*
+    - ../../modules/layer1-compute/*.tf*
+  depends_on:
+  - core_network
+  - core_security
+  dir: layer1/compute
+  execution_order_group: 1
+  name: layer1_compute
+  workflow: terragrunt
+- autoplan:
+    enabled: true
+    when_modified:
+    - '*.hcl'
+    - '*.tf*'
+    - ../../terragrunt.hcl
+    - ../../core/network/terragrunt.hcl
+    - ../../modules/core-network/*.tf*
+    - ../../common.tfvars
+    - ../../core/security/terragrunt.hcl
+    - ../../modules/core-security/*.tf*
+    - ../../modules/layer1-monitoring/*.tf*
+  depends_on:
+  - core_network
+  - core_security
+  dir: layer1/monitoring
+  execution_order_group: 1
+  name: layer1_monitoring
+  workflow: terragrunt
+- autoplan:
+    enabled: true
+    when_modified:
+    - '*.hcl'
+    - '*.tf*'
+    - ../../terragrunt.hcl
+    - ../../core/network/terragrunt.hcl
+    - ../../modules/core-network/*.tf*
+    - ../../common.tfvars
+    - ../../core/security/terragrunt.hcl
+    - ../../modules/core-security/*.tf*
+    - ../../modules/layer1-storage/*.tf*
+  depends_on:
+  - core_network
+  - core_security
+  dir: layer1/storage
+  execution_order_group: 1
+  name: layer1_storage
+  workflow: terragrunt
+- autoplan:
+    enabled: true
+    when_modified:
+    - '*.hcl'
+    - '*.tf*'
+    - ../../terragrunt.hcl
+    - ../../layer1/compute/terragrunt.hcl
+    - ../../core/network/terragrunt.hcl
+    - ../../modules/core-network/*.tf*
+    - ../../common.tfvars
+    - ../../core/security/terragrunt.hcl
+    - ../../modules/core-security/*.tf*
+    - ../../modules/layer1-compute/*.tf*
+    - ../../layer1/storage/terragrunt.hcl
+    - ../../modules/layer1-storage/*.tf*
+    - ../../layer1/monitoring/terragrunt.hcl
+    - ../../modules/layer1-monitoring/*.tf*
+    - ../../modules/layer2-analytics/*.tf*
+  depends_on:
+  - layer1_compute
+  - core_network
+  - core_security
+  - layer1_storage
+  - layer1_monitoring
+  dir: layer2/analytics
+  execution_order_group: 2
+  name: layer2_analytics
+  workflow: terragrunt
+- autoplan:
+    enabled: true
+    when_modified:
+    - '*.hcl'
+    - '*.tf*'
+    - ../../terragrunt.hcl
+    - ../../layer1/compute/terragrunt.hcl
+    - ../../core/network/terragrunt.hcl
+    - ../../modules/core-network/*.tf*
+    - ../../common.tfvars
+    - ../../core/security/terragrunt.hcl
+    - ../../modules/core-security/*.tf*
+    - ../../modules/layer1-compute/*.tf*
+    - ../../layer1/storage/terragrunt.hcl
+    - ../../modules/layer1-storage/*.tf*
+    - ../../modules/layer2-api/*.tf*
+  depends_on:
+  - layer1_compute
+  - core_network
+  - core_security
+  - layer1_storage
+  dir: layer2/api
+  execution_order_group: 2
+  name: layer2_api
+  workflow: terragrunt
+- autoplan:
+    enabled: true
+    when_modified:
+    - '*.hcl'
+    - '*.tf*'
+    - ../../terragrunt.hcl
+    - ../../layer1/storage/terragrunt.hcl
+    - ../../core/network/terragrunt.hcl
+    - ../../modules/core-network/*.tf*
+    - ../../common.tfvars
+    - ../../core/security/terragrunt.hcl
+    - ../../modules/core-security/*.tf*
+    - ../../modules/layer1-storage/*.tf*
+    - ../../layer1/monitoring/terragrunt.hcl
+    - ../../modules/layer1-monitoring/*.tf*
+    - ../../modules/layer2-frontend/*.tf*
+  depends_on:
+  - layer1_storage
+  - core_network
+  - core_security
+  - layer1_monitoring
+  dir: layer2/frontend
+  execution_order_group: 2
+  name: layer2_frontend
+  workflow: terragrunt
+version: 3
