@@ -32,3 +32,4 @@ inputs = {
   bucket_names     = dependency.storage.outputs.bucket_names
   rds_endpoint     = dependency.storage.outputs.rds_endpoint
 } 
+
